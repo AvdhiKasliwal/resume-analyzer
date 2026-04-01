@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Analyzer</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            margin-top: 40px;
+            background: white;
+            color: black;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .score-box {
+            margin-top: 20px;
+        }
+
+        .progress {
+            width: 100%;
+            background: #ddd;
+            border-radius: 20px;
+        }
+
+        .progress-bar {
+            height: 20px;
+            border-radius: 20px;
+            background: green;
+            width: {{ score }}%;
+        }
+
+        ul {
+            text-align: left;
+            display: inline-block;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🚀 AI Resume Analyzer</h2>
+    <p>Optimize your resume for job success</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="resume" required>
+
+        <textarea name="job_desc" placeholder="Paste Job Description here" rows="5"></textarea>
+
+        <button type="submit">Analyze Resume</button>
+    </form>
+
+    {% if skills %}
+        <h3>✅ Detected Skills</h3>
+        <ul>
+            {% for skill in skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>❌ Missing Skills</h3>
+        <ul>
+            {% for skill in missing_skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if score %}
+    <div class="score-box">
+        <h3>📊 Match Score: {{ score }}%</h3>
+        <div class="progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
